@@ -1,0 +1,15 @@
+aws cloudformation validate-template \ 
+ --template-body file://cloudformation/infrastructure.yaml --region YOUR_REGION 
+aws cloudformation create-stack \ 
+ --stack-name aws-devops-assignment \ 
+ --template-body file://cloudformation/infrastructure.yaml \ 
+ --parameters ParameterKey=AmiId,ParameterValue=YOUR_AMI_ID \ 
+ ParameterKey=InstanceType,ParameterValue=t3.micro \ 
+ ParameterKey=MyIpCidr,ParameterValue=YOUR_PUBLIC_IP/32 \ 
+ ParameterKey=NotificationEmail,ParameterValue=YOUR_EMAIL \ 
+ ParameterKey=StudentName,ParameterValue=YOUR_NAME \ 
+ --capabilities CAPABILITY_IAM --region YOUR_REGION 
+aws cloudformation wait stack-create-complete \ 
+ --stack-name aws-devops-assignment --region YOUR_REGION 
+aws cloudformation describe-stacks --stack-name aws-devops-assignment \ 
+ --region YOUR_REGION --query 'Stacks[0].{Status:StackStatus,Outputs:Outputs}' 
