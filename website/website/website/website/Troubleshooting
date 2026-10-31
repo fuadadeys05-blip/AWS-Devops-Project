@@ -1,0 +1,7 @@
+
+aws ec2 describe-instances --instance-ids YOUR_INSTANCE_ID --region YOUR_REGION 
+aws ec2 describe-instance-status --instance-ids YOUR_INSTANCE_ID --include-all-instances --region YOUR_REGION aws ec2 describe-security-groups --group-ids YOUR_SG_ID --region YOUR_REGION 
+# On the instance: 
+sudo systemctl status httpd 
+sudo journalctl -u httpd --no-pager 
+sudo tail -n 100 /var/log/cloud-init-output.log 
